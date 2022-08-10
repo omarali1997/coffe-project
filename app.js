@@ -43,6 +43,7 @@ Drink.prototype.render = function () {
     // create the images :
     let imageEl = document.createElement('img');
     imageEl.src = this.image;
+    imageEl.alt = this.name;
     sectionEl.appendChild(imageEl);
 
     // price:
@@ -101,15 +102,16 @@ function getData() {
     let arrayData = JSON.parse(retrievedData);
     // each object doesn't has access to render method
     if (arrayData != null) {
-        for (let i = 1; i < arrayData.length; i++) {
+        for (let i = 0; i < arrayData.length; i++) {
             // reinstantiation: re creating instance
+            if(allDrinks[i]?.name !== arrayData[i].name){
             new Drink(arrayData[i].name,
                 arrayData[i].ingredients,
                 arrayData[i].image,
                 arrayData[i].isCol,
                 arrayData[i].isHot,
                 arrayData[i].price);
-        }
+        }}
     }
     renderAll();
 }
